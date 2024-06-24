@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -75,10 +74,10 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'your_db_name',
-        'USER': 'your_db_user',
-        'PASSWORD': 'your_db_password',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'remotecollab_db',
+        'USER': 'remotecollab_user',
+        'PASSWORD': 'strongpassword',
         'HOST': 'localhost',
         'PORT': '5432',
     }
