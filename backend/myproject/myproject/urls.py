@@ -22,7 +22,5 @@ urlpatterns = [
     path('auth/', include('custom_auth.urls')),
     path('accounts/', include('allauth.urls')),  #
     
-    path('documents/', include('documents.urls')),
-    path('tasks/', include('tasks.urls')),
     path('communication/', include('communication.urls')),
 ]

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import './DocumentEditor.css'
+import './DocumentEditor.css';
+
 const DocumentEditor = () => {
   const [content, setContent] = useState('');
   const [socket, setSocket] = useState(null);
@@ -18,7 +19,9 @@ const DocumentEditor = () => {
 
   const updateContent = (newContent) => {
     setContent(newContent);
-    socket.send(JSON.stringify({ content: newContent }));
+    if (socket) {
+      socket.send(JSON.stringify({ content: newContent }));
+    }
   };
 
   return (
