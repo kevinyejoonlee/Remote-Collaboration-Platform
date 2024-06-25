@@ -1,0 +1,12 @@
+.dashboard {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .video-call-section,
+  .document-editor-section {
+    flex: 1;
+    margin: 10px;
+  }
+  

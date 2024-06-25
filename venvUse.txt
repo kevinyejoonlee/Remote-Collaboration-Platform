@@ -1,0 +1,8 @@
+python3 -m venv backendVENV
+
+source backendVENV/bin/activate
+
+pip install --upgrade pip
+
+deactivate
+
