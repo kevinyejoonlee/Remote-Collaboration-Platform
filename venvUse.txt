@@ -1,6 +1,8 @@
-python3 -m venv backendVENV
+python3 -m venv venv
 
-source backendVENV/bin/activate
+source venv/bin/activate
+
+pip install -r requirements.txt
 
 pip install --upgrade pip
 
