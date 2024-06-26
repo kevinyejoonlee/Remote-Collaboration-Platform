@@ -1,4 +1,4 @@
-# Remote Collaboration Platform
+# TeamFlow
 Created a Remote Collaboration Platform, I call it teamFlow, that allows a team to work together in real-time. The platform uses collaborative document editing, allowing multiple users to edit documents simultaneously and efficiently. 
 
 Technologies
