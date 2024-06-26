@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import DocumentEditor from '../../components/DocumentEditor/DocumentEditor';
 import UserSelector from '../../components/UserSelector/UserSelector';
-import api from '../../services/api';
-import './Dashboard.css'; 
+import axios from 'axios'; // Ensure axios is installed
+import './Dashboard.css';
 
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
@@ -11,7 +11,11 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await api.get('/auth/users/');  // Ensure this matches your endpoint
+        const response = await axios.get('http://localhost:8000/auth/users/', {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+          }
+        });
         setUsers(response.data);
       } catch (error) {
         console.error('Error fetching users:', error);

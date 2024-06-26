@@ -1,16 +1,20 @@
 import React from 'react';
 
 const UserSelector = ({ users, editDocumentWithUser }) => {
-  return (
-    <div>
-      {users.map(user => (
-        <div key={user.id}>
-          {user.username}
-          <button onClick={() => editDocumentWithUser(user.id)}>Edit Document</button>
+    return (
+        <div>
+            <h2>Select a User to Collaborate With:</h2>
+            <ul>
+                {users.map(user => (
+                    <li key={user.id}>
+                        <button onClick={() => editDocumentWithUser(user.id)}>
+                            {user.username}
+                        </button>
+                    </li>
+                ))}
+            </ul>
         </div>
-      ))}
-    </div>
-  );
+    );
 };
 
 export default UserSelector;

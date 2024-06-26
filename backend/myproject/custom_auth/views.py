@@ -1,38 +1,18 @@
-from django.shortcuts import render
-from rest_framework import generics, permissions
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework import generics
 from django.contrib.auth.models import User
-from .serializers import UserSerializer
-from rest_framework.response import Response
-from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from .serializers import MyTokenObtainPairSerializer, RegisterSerializer, UserSerializer
 
-class CreateUserView(generics.CreateAPIView):
-    model = User
-    permission_classes = [AllowAny]
-    serializer_class = UserSerializer
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
 
-    def create(self, request, *args, **kwargs):
-        username = request.data.get('username')
-        if User.objects.filter(username=username).exists():
-            return Response({"error": "User already exists"}, status=status.HTTP_400_BAD_REQUEST)
-        
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    permission_classes = (AllowAny,)
+    serializer_class = RegisterSerializer
 
-class UserProfileView(generics.RetrieveUpdateAPIView):
-    model = User
-    permission_classes = [IsAuthenticated]
-    serializer_class = UserSerializer
-
-    def get_object(self):
-        return self.request.user
-    
 class UserListView(generics.ListAPIView):
+    queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return User.objects.exclude(id=self.request.user.id)

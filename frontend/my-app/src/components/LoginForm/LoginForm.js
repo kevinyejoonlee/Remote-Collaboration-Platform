@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import './LoginForm.css';
-import api from '../../services/api';
+import axios from 'axios'; // Ensure axios is installed
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setToken } from '../../actions/authActions';
 
 function LoginForm() {
   const [name, setName] = useState('');
@@ -11,6 +13,7 @@ function LoginForm() {
   const [action, setAction] = useState('Login');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,7 +23,7 @@ function LoginForm() {
           setError('Passwords do not match');
           return;
         }
-        await api.post('/auth/signup/', {
+        await axios.post('http://localhost:8000/auth/signup/', {
           username,
           password,
           confirm_password: confirmPassword,
@@ -29,12 +32,13 @@ function LoginForm() {
         console.log('Signup successful');
         setAction('Login');
       } else {
-        const response = await api.post('/auth/login/', {
+        const response = await axios.post('http://localhost:8000/auth/login/', {
           username,
           password,
         });
         localStorage.setItem('access_token', response.data.access);
         localStorage.setItem('refresh_token', response.data.refresh);
+        dispatch(setToken(response.data.access)); // Dispatch the token
         setError('');
         console.log('Login successful');
         navigate('/dashboard');

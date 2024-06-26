@@ -1,34 +1,53 @@
-import React, { useEffect, useState } from 'react';
-import './DocumentEditor.css';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 const DocumentEditor = () => {
   const [content, setContent] = useState('');
-  const [socket, setSocket] = useState(null);
+  const token = useSelector(state => state.auth.token);
 
   useEffect(() => {
-    const ws = new WebSocket(`ws://localhost:8000/ws/document/`);
-    ws.onmessage = (e) => {
-      const data = JSON.parse(e.data);
+    if (!token) {
+      console.error('Token is null');
+      return;
+    }
+
+    const socket = new WebSocket(`ws://localhost:8000/ws/document/?token=${token}`);
+
+    socket.onmessage = (event) => {
+      const data = JSON.parse(event.data);
       setContent(data.content);
     };
-    setSocket(ws);
-    return () => {
-      ws.close();
-    };
-  }, []);
 
-  const updateContent = (newContent) => {
-    setContent(newContent);
-    if (socket) {
-      socket.send(JSON.stringify({ content: newContent }));
+    socket.onclose = (event) => {
+      console.error('Chat socket closed unexpectedly');
+    };
+
+    return () => socket.close();
+  }, [token]);
+
+  const sendMessage = (message) => {
+    if (!token) {
+      console.error('Token is null');
+      return;
     }
+
+    const socket = new WebSocket(`ws://localhost:8000/ws/document/?token=${token}`);
+    socket.onopen = () => {
+      socket.send(JSON.stringify({ 'content': message }));
+    };
   };
 
   return (
-    <textarea
-      value={content}
-      onChange={(e) => updateContent(e.target.value)}
-    />
+    <div>
+      <textarea
+        value={content}
+        onChange={(e) => {
+          setContent(e.target.value);
+          sendMessage(e.target.value);
+        }}
+        placeholder="Start editing the document..."
+      />
+    </div>
   );
 };
 
