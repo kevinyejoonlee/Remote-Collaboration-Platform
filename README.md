@@ -18,7 +18,7 @@ In the future, AWS S3 buckets will be used for storage.
 3. User A and User B start a session or chat.
 4. Both users edit a shared document in real-time.
 
-
+![230ED0F9-D5AA-4EFA-82CB-B6504BEEBF3F_1_201_a](https://github.com/kevinyejoonlee/Remote-Collaboration-Platform/assets/73869929/c5555ea5-b6f5-439d-a8c3-24a131c9c40a)
 ![image](https://github.com/kevinyejoonlee/Remote-Collaboration-Platform/assets/73869929/7b055857-d8bb-4fd1-a645-0d0f854f8569)
 ![image](https://github.com/kevinyejoonlee/Remote-Collaboration-Platform/assets/73869929/34766a65-d889-407b-b726-850424d221c3)
 ![image](https://github.com/kevinyejoonlee/Remote-Collaboration-Platform/assets/73869929/2cdbffc8-3d96-4088-8cf9-2e23fcd0ad68)
