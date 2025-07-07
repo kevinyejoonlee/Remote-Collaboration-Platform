@@ -1,6 +1,4 @@
-# TeamFlow
-
-TeamFlow is a Remote Collaboration Platform that allows a team to work together in real-time. The platform uses collaborative document editing, enabling multiple users to edit documents simultaneously and efficiently.
+A Remote Collaboration Platform that allows a team to work together in real-time. The platform uses collaborative document editing, enabling multiple users to edit documents simultaneously and efficiently.
 
 ## Technologies
 - **Django Restful APIs**: For backend services and API design.
